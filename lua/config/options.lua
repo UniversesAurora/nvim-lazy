@@ -22,6 +22,17 @@ opt.ruler = true
 opt.colorcolumn = "80"
 opt.visualbell = true
 opt.listchars = "tab:> ,trail:·,nbsp:·"
+opt.completeopt = "menu,menuone,noselect"
+opt.guicursor =
+  "n-v-c:block-Cursor,i-ci-ve-sm:block-blinkwait1000-blinkon500-blinkoff500-Cursor,r-cr:hor100-blinkwait5000-blinkon500-blinkoff500"
+vim.opt.whichwrap:append({
+  ["<"] = true,
+  [">"] = true,
+  ["["] = true,
+  ["]"] = true,
+  h = true,
+  l = true,
+})
 
 vim.g.sweetie = {
   -- Pop-up menu pseudo-transparency
@@ -63,7 +74,7 @@ vim.g.sweetie = {
     telescope = true,
   },
   -- Enable custom cursor coloring even in terminal Neovim sessions
-  cursor_color = true,
+  cursor_color = false,
   -- Use sweetie's palette in `:terminal` instead of your default terminal colorscheme
   terminal_colors = true,
 }

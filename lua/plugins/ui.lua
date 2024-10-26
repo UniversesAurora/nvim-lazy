@@ -2,7 +2,19 @@ return {
   {
     "rcarriga/nvim-notify",
     opts = {
+      stages = "fade_in_slide_out",
       timeout = 5000,
+    },
+  },
+  {
+    "folke/noice.nvim",
+    opts = {
+      routes = {
+        -- { filter = { event = "notify", find = "ping" }, opts = { skip = true } },
+        -- { filter = { event = "notify", find = "pong" }, opts = { skip = true } },
+        { filter = { find = "completion request failed" }, opts = { skip = true } },
+        { filter = { find = "%[codeium/codeium%] %}" }, opts = { skip = true } },
+      },
     },
   },
   {
