@@ -20,7 +20,7 @@ require("lazy").setup({
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import/override with your plugins
     { import = "plugins" },
-    { import = "lazyvim.plugins.extras.coding.codeium" },
+    { import = "lazyvim.plugins.extras.ai.codeium" },
     { import = "lazyvim.plugins.extras.lang.clangd" },
     { import = "lazyvim.plugins.extras.lang.rust" },
     -- { import = "lazyvim.plugins.extras.lang.haskell" },
