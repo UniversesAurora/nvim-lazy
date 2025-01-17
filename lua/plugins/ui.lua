@@ -51,7 +51,7 @@ return {
       end)
       hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 
-      opts.indent.highlight = hl_indent
+      opts.indent = { highlight = hl_indent }
       opts.whitespace = {
         highlight = hl_whitespace,
         remove_blankline_trail = false,
