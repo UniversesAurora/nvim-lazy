@@ -15,3 +15,8 @@ Snacks.toggle.new({
     vim.opt.list = state
   end,
 }):map("<leader>uv")
+
+-- Remap Toggle comment to Ctrl+/
+vim.keymap.del("n", "<C-/>")
+vim.keymap.set("n", "<C-/>", "gcc", { desc = "Toggle comment", remap = true })
+vim.keymap.set("x", "<C-/>", "gc", { desc = "Toggle comment", remap = true })
