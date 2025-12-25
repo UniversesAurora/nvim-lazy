@@ -68,7 +68,7 @@ vim.g.sweetie = {
   --  cyan
   palette = {
     dark = { fg = 0x9575CD, bg_hl = 0x4527A0, blue = 0xB39DDB, magenta = 0x2196F3 },
-    light = { fg = 0x5E35B1, bg = 0xFFFFFF, bg_hl = 0xEDE7F6, bg_alt = 0xEDE7F6, blue = 0x673AB6, magenta = 0x2196F3 },
+    light = { fg = 0x5E35B1, bg = 0xFFFFFF, bg_hl = 0xB39DDB, bg_alt = 0xEDE7F6, blue = 0x673AB6, magenta = 0x2196F3 },
   },
   -- Override default highlighting groups options
   overrides = {},
