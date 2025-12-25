@@ -15,15 +15,20 @@ return {
               -- Close command interface
               cmp.cancel()
               -- Send <C-u> (Clear Line) followed by <C-c> (Interrupt)
-              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-u><C-c>", true, true, true), "n", true)
-              -- return true
+              -- Defers the exit signal to the next event loop tick
+              vim.schedule(function()
+                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-u><C-c>", true, true, true), "n", true)
+              end)
+              return true
             end,
           },
           ["<C-c>"] = {
             function(cmp)
               cmp.cancel()
-              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-u><C-c>", true, true, true), "n", true)
-              -- return true
+              vim.schedule(function()
+                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-u><C-c>", true, true, true), "n", true)
+              end)
+              return true
             end,
           },
 
