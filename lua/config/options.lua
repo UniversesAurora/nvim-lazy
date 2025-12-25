@@ -5,6 +5,9 @@
 -- Open this comment in powershell
 -- LazyVim.terminal.setup("pwsh")
 
+-- Disable all animations globally
+vim.g.snacks_animate = false
+
 -- LazyVim auto format
 vim.g.autoformat = false
 
