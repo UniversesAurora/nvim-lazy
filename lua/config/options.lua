@@ -11,6 +11,9 @@ vim.g.snacks_animate = false
 -- LazyVim auto format
 vim.g.autoformat = false
 
+-- Use telescope as the default picker
+vim.g.lazyvim_picker = "telescope"
+
 local opt = vim.opt
 opt.relativenumber = false -- Relative line numbers
 opt.clipboard = "unnamedplus"
