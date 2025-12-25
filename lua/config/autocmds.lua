@@ -26,12 +26,14 @@ vim.api.nvim_create_autocmd("OptionSet", {
 })
 
 -- Restore Invisible Characters setting on VimEnter
-vim.api.nvim_create_autocmd("VimEnter", {
+local group = vim.api.nvim_create_augroup("RestoreInvisibleChars", { clear = true })
+vim.api.nvim_create_autocmd({ "VimEnter", "BufReadPost", "BufNewFile" }, {
+  group = group,
   callback = function()
     if vim.g.SHOW_INVISIBLE_CHARS == nil then
       vim.g.SHOW_INVISIBLE_CHARS = false
     end
 
     vim.opt.list = vim.g.SHOW_INVISIBLE_CHARS
-  end
+  end,
 })
