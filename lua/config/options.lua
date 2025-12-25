@@ -29,7 +29,7 @@ opt.listchars = "tab:> ,trail:·,nbsp:·"
 opt.completeopt = "menu,menuone,noselect"
 opt.guicursor =
   "n-v-c:block-Cursor,i-ci-ve-sm:block-blinkwait1000-blinkon500-blinkoff500-Cursor,r-cr:hor100-blinkwait5000-blinkon500-blinkoff500"
-vim.opt.whichwrap:append({
+opt.whichwrap:append({
   ["<"] = true,
   [">"] = true,
   ["["] = true,

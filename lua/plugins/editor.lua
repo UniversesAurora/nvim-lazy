@@ -1,9 +1,5 @@
 return {
   {
-    "folke/trouble.nvim",
-    opts = { use_diagnostic_signs = true },
-  },
-  {
     "nvim-neo-tree/neo-tree.nvim",
     opts = {
       filesystem = {

@@ -1,38 +1,77 @@
 return {
   {
-    "hrsh7th/nvim-cmp",
-    opts = function(_, opts)
-      local cmp = require("cmp")
-      opts.preselect = cmp.PreselectMode.None
-      opts.completion = {
-        completeopt = "menu,menuone,noinsert,noselect",
-      }
-      opts.mapping = vim.tbl_deep_extend("force", opts.mapping, {
-        ["<CR>"] = cmp.mapping({
+    'saghen/blink.cmp',
+    opts = {
+      completion = {
+        list = { selection = { preselect = false, auto_insert = true } },
+        documentation = { auto_show = true },
+      },
+      cmdline = {
+        -- enabled = true,
+        keymap = {
+          -- Prevent History Pollution when aborting commands
+          ["<Esc>"] = {
+            function(cmp)
+              -- Close command interface
+              cmp.cancel()
+              -- Send <C-u> (Clear Line) followed by <C-c> (Interrupt)
+              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-u><C-c>", true, true, true), "n", true)
+              -- return true
+            end,
+          },
+          ["<C-c>"] = {
+            function(cmp)
+              cmp.cancel()
+              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-u><C-c>", true, true, true), "n", true)
+              -- return true
+            end,
+          },
 
-          i = function(fallback)
-            if cmp.visible() and cmp.get_active_entry() then
-              cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-            else
-              fallback()
-            end
-          end,
-          s = cmp.mapping.confirm({ select = true }),
-          c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-        }),
-        -- ["<Tab>"] = cmp.mapping(function(fallback)
-        --   -- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
-        --   if cmp.visible() then
-        --     local entry = cmp.get_selected_entry()
-        --     if not entry then
-        --       cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-        --     end
-        --     cmp.confirm()
-        --   else
-        --     fallback()
-        --   end
-        -- end, { "i", "s", "c" }),
-      })
-    end,
+          -- ["<Tab>"] = { "show", "select_next", "fallback" },
+          -- ["<S-Tab>"] = { "select_prev", "fallback" },
+
+          -- Up/Down keymaps:
+          --  - If Menu is visible AND an item is active: Navigate the menu.
+          --  - Otherwise: Fallback to Neovim's native history traversal (Up/Down).
+          ["<Down>"] = {
+            function(cmp)
+              if cmp.is_menu_visible() and cmp.get_selected_item() then
+                return cmp.select_next()
+              end
+            end,
+            "fallback",
+          },
+          ["<Up>"] = {
+            function(cmp)
+              if cmp.is_menu_visible() and cmp.get_selected_item() then
+                return cmp.select_prev()
+              end
+            end,
+            "fallback",
+          },
+
+          -- Enter keymap:
+          --  - Explicitly 'accept' the completion to update the buffer.
+          --  - Schedule the execution signal (<CR>) for the next event loop tick.
+          ["<CR>"] = {
+            function(cmp)
+              if cmp.is_menu_visible() and cmp.get_selected_item() then
+                cmp.accept()
+                vim.schedule(function()
+                  vim.api.nvim_feedkeys(
+                    vim.api.nvim_replace_termcodes("<CR>", true, true, true),
+                    "c",
+                    true
+                  )
+                end)
+
+                return true
+              end
+            end,
+            "fallback",
+          },
+        },
+      },
+    },
   },
 }

@@ -1,29 +1,26 @@
 return {
-  {
-    "rcarriga/nvim-notify",
-    opts = {
-      stages = "fade_in_slide_out",
-      timeout = 2000,
-    },
-  },
-  {
-    "folke/noice.nvim",
-    opts = {
-      routes = {
-        -- { filter = { event = "notify", find = "ping" }, opts = { skip = true } },
-        -- { filter = { event = "notify", find = "pong" }, opts = { skip = true } },
-        { filter = { find = "completion request failed" }, opts = { skip = true } },
-        { filter = { find = "%[codeium/codeium%] %}" }, opts = { skip = true } },
-      },
-    },
-  },
+  -- {
+  --   "folke/noice.nvim",
+  --   opts = {
+  --     routes = {
+  --       -- { filter = { event = "notify", find = "ping" }, opts = { skip = true } },
+  --       -- { filter = { event = "notify", find = "pong" }, opts = { skip = true } },
+  --       -- { filter = { find = "completion request failed" }, opts = { skip = true } },
+  --       -- { filter = { find = "%[codeium/codeium%] %}" }, opts = { skip = true } },
+  --     },
+  --   },
+  -- },
   {
     "HiPhish/rainbow-delimiters.nvim",
   },
   {
     "lukas-reineke/indent-blankline.nvim",
-    opts = function(_, opts)
-      local hl_indent = {
+    main = "ibl",
+    ---@module "ibl"
+    ---@type ibl.config
+    opts = {},
+    config = function(_, opts)
+      local highlight = {
         "RainbowRed",
         "RainbowYellow",
         "RainbowBlue",
@@ -32,12 +29,8 @@ return {
         "RainbowViolet",
         "RainbowCyan",
       }
-      local hl_whitespace = {
-        "CursorColumn",
-        "Whitespace",
-      }
 
-      local hooks = require("ibl.hooks")
+      local hooks = require "ibl.hooks"
       -- create the highlight groups in the highlight setup hook, so they are reset
       -- every time the colorscheme changes
       hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
@@ -49,14 +42,24 @@ return {
         vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
         vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
       end)
-      hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 
-      opts.indent = { highlight = hl_indent }
-      opts.whitespace = {
-        highlight = hl_whitespace,
-        remove_blankline_trail = false,
+      require("ibl").setup {
+        indent = {
+          highlight = highlight,
+        },
+        whitespace = {
+          highlight = {
+            "CursorColumn",
+            "Whitespace",
+          },
+          remove_blankline_trail = false,
+        },
+        scope = {
+          enabled = false,
+          -- show_start = true,
+          -- show_end = true,
+        },
       }
-      -- opts.scope = { show_start = true, show_end = true }
     end,
   },
   {
@@ -76,8 +79,19 @@ return {
   },
   {
     "folke/snacks.nvim",
-    opts = function(_, opts)
-      local logo = [[
+    ---@type snacks.Config
+    opts = {
+      ---@type table<string, snacks.win.Config>
+      styles = {
+        notification = {
+          wo = {
+            wrap = true,
+          },
+        },
+      },
+      dashboard = {
+        preset = {
+          header = [[
 
 
 ░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓███████▓▒░▒▓█▓▒░░▒▓██████▓▒░░▒▓███████▓▒░   
@@ -103,8 +117,23 @@ return {
 ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░                                  
 ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓██▓▒░                           
  ░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░░▒▓██▓▒░                           
-      ]]
-      opts.dashboard.preset.header = logo
-    end,
+          ]],
+        },
+      },
+      indent = {
+        enabled = false,
+      },
+    },
+  },
+  {
+    "folke/which-key.nvim",
+    opts = {
+      -- preset = "classic",
+      win = {
+        -- Value could be int (line count) or float (% of screen size)
+        height = { min = 0.4, max = 0.9 },
+        width = { min = 0.4, max = 0.9 },
+      },
+    },
   },
 }
