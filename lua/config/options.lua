@@ -12,7 +12,7 @@ vim.g.snacks_animate = false
 vim.g.autoformat = false
 
 -- Use telescope as the default picker
-vim.g.lazyvim_picker = "telescope"
+-- vim.g.lazyvim_picker = "fzf-lua"
 
 local opt = vim.opt
 opt.relativenumber = false -- Relative line numbers
