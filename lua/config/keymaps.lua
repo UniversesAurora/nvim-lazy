@@ -17,6 +17,10 @@ Snacks.toggle.new({
 }):map("<leader>uv")
 
 -- Remap Toggle comment to Ctrl+/
+-- On some terminals, Ctrl+/ sends <C-_> so...
 vim.keymap.del("n", "<C-/>")
+vim.keymap.del("n", "<C-_>")
 vim.keymap.set("n", "<C-/>", "gcc", { desc = "Toggle comment", remap = true })
 vim.keymap.set("x", "<C-/>", "gc", { desc = "Toggle comment", remap = true })
+vim.keymap.set("n", "<C-_>", "gcc", { desc = "Toggle comment", remap = true })
+vim.keymap.set("x", "<C-_>", "gc", { desc = "Toggle comment", remap = true })
