@@ -21,6 +21,7 @@ opt.smarttab = true
 opt.ruler = true
 opt.colorcolumn = "80"
 opt.visualbell = true
+opt.list = false
 opt.listchars = "tab:> ,trail:·,nbsp:·"
 opt.completeopt = "menu,menuone,noselect"
 opt.guicursor =
