@@ -11,6 +11,9 @@ return {
   --   },
   -- },
   {
+    "sitiom/nvim-numbertoggle",
+  },
+  {
     "HiPhish/rainbow-delimiters.nvim",
   },
   {
